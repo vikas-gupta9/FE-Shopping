@@ -1,0 +1,69 @@
+.header-container{
+    width:100%;
+    height: 50px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.header-lists{
+    display: flex;
+}
+.header-lists  span{
+    padding-left: 20px;
+}
+.header-items{
+    padding-right: 20px;
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /* border-bottom: 1px dotted black; If you want dots under the hoverable text */
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    min-width: 100px;
+    height:auto;
+    background-color:antiquewhite;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    right: 0px;
+    top: 15px;
+    z-index: 1;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  .tooltiptext-text{
+    margin: 0%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+ 
+  .tooltiptext-text:hover{
+    background-color: bisque;
+    cursor: pointer;
+  }
+.header-cart{
+  cursor: pointer;
+}

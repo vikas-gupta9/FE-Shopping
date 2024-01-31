@@ -1,0 +1,100 @@
+.card-container {
+  /* background-color:rgb(224, 214, 198); */
+  padding: 0 20px 0 20px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+.card-items-container {
+  /* display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-template-columns: repeat(4, 2fr); */
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content:flex-start; */
+  align-items: center;
+  column-gap: 70px;
+}
+.cards {
+  /* background-color: antiquewhite; */
+  background-color: rgb(250, 242, 230);
+  width: 250px;
+  height: 400px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  margin-bottom: 30px;
+}
+.cards-image {
+  background-color: antiquewhite;
+  height: 300px;
+  position: relative;
+}
+.cards-image img {
+  max-width: 250px;
+  min-height: 300px;
+  object-fit: cover;
+  border-radius: 4px 4px 0px 0px;
+}
+.cards-name-price {
+  padding: 10px 20px 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cards-description {
+  max-height: 25px;
+  overflow: hidden;
+  padding: 0px 20px 10px 20px;
+}
+.cards-cart {
+  background-color:rgb(250, 242, 230);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  position: absolute;
+  bottom: 16px;
+  right: 10px;
+  font-size: 18px;
+  width: 90px;
+  height: 30px;
+  border-radius: 10px;
+  /* box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.cards-cart-color {
+  background-color: whitesmoke;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  position: absolute;
+  top: 16px;
+  left: 10px;
+  font-size: 12px;
+  width: 40px;
+  height: 25px;
+  border-radius: 10px;
+  /* box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.card-color-filter span {
+  cursor: pointer;
+}
+.select-price-container {
+  font-size: 18px;
+}
+
+.select-price {
+  background-color: rgb(250, 242, 230);
+  border: none;
+  font-size: 16px;
+  outline: none;
+  size-adjust:inherit;
+}
+
+
