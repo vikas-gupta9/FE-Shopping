@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Card from "../card/Card";
 import Header from "../header/Header";
 
-const Todo = () => {
+const Dashboard = () => {
   const [cookies,setCookie ,removeCookie] = useCookies();
   const { token: auth, loggedIn, user_id } = cookies;
   const [userData, setUserData] = useState();
@@ -35,14 +35,14 @@ const Todo = () => {
     handleGetDetails();
   }, []);
 
-  const logout = (e) => {
-    e.preventDefault();
-    removeCookie("token");
-    removeCookie("user_id");
-    removeCookie("loggedIn");
-    toast.success("Logged out successfully");
-    navigate("/");
-  };
+  // const logout = (e) => {
+  //   e.preventDefault();
+  //   removeCookie("token");
+  //   removeCookie("user_id");
+  //   removeCookie("loggedIn");
+  //   toast.success("Logged out successfully");
+  //   navigate("/");
+  // };
 
   return (
     <>
@@ -52,4 +52,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default Dashboard;
