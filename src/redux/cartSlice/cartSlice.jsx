@@ -10,6 +10,7 @@ const cartSlice = createSlice({
       state.cart = action.payload;
     },
     addtoCart: (state, action) => {
+      console.log("store", action.payload)
       const itemInCart = state.cart.find(
         (item) => item.id === action.payload.id
       );

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useSelector } from "react-redux";
+
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -16,6 +18,10 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies();
+  const { token: auth, loggedIn, user_id } = cookies;
+  const cartItems = useSelector((state) => state.cart.cart);
+
+
 
   const isValidEmail = (value) => {
     // Regex for email validation
@@ -62,7 +68,6 @@ const Login = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-
     const { username, email, password } = loginData;
     const Cred = {
       username: username,
@@ -114,8 +119,8 @@ const Login = () => {
         setCookie("user_id", data?.user_id, { path: "/" });
         setCookie("loggedIn", true, { path: "/" });
         toast.success("User logged in successfully");
-        navigate("/dashboard");
-        // setIs_active(true);
+        navigate("/");
+       
       } else {
         toast.error(data.msg);
       }
@@ -123,6 +128,10 @@ const Login = () => {
       console.log(error);
     }
   };
+  
+
+
+
   return (
     <>
     <div className="login-container">

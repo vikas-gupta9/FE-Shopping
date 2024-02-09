@@ -14,6 +14,9 @@ const CartItem = ({ id, name, description,itemId, color, price,quantity, files }
   const dispatch = useDispatch();
 
 const handleRemoveCartItem = async() => {
+
+  if(loggedIn === true)
+  {
   try {
     const response = await fetch("http://localhost:8000/cart/remove-from-cart", {
       method: "POST",
@@ -33,10 +36,12 @@ const handleRemoveCartItem = async() => {
   } catch (error) {
     console.log(error);
   }
+} else dispatch(removefromCart({ id: id }));
 }
 
 const handleQuantity = async() => {
-
+  if(loggedIn === true)
+  {
   try {
     const response = await fetch("http://localhost:8000/cart/update-quantity", {
       method: "POST",
@@ -55,6 +60,7 @@ const handleQuantity = async() => {
   } catch (error) {
     console.log(error);
   }
+} else return;
 }
 useEffect(() => {
   let delaytime = setTimeout(() => handleQuantity(),2000)
@@ -73,7 +79,7 @@ useEffect(() => {
         <div className="cart-items-data">
           <div className="cart-items-close-conatiner">
             <div className="cart-items-close">
-              <span onClick={() => handleRemoveCartItem()}>
+              <span onClick={handleRemoveCartItem}>
                 &nbsp; X
               </span>
             </div>

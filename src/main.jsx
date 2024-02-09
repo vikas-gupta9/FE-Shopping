@@ -23,5 +23,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       theme="colored"
     />
   </BrowserRouter>
-  </React.StrictMode>
+ </React.StrictMode>
 );

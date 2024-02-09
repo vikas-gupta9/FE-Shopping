@@ -97,4 +97,17 @@
   size-adjust:inherit;
 }
 
-
+.card-search{
+  display: flex;
+  align-items: center;
+  width:clamp(200px,75%,400px);
+}
+.card-search-input{
+  width:100%;
+	height: 10px;
+	background: whitesmoke;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}

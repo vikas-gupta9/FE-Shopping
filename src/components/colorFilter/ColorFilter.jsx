@@ -43,13 +43,13 @@ const ColorFilter = ({ products, setProductsColor, handleClose ,handleGetProduct
             <span>{selectedColors.length} filter selected</span>
           </div>
           <div className="colorfilter-text-container">
-            {uniqueColors.map((color, index) => (
-              <label className="colorfilter-text" key={index}>
+            {uniqueColors.map((color) => (
+              <label className="colorfilter-text" key={color}>
                 <input
                   type="checkbox"
                   value={color}
                   // checked={colorCheck}
-                  onChange={(e) => handleColorChange(e)}
+                  onChange={handleColorChange}
                 />
                 {color}
               </label>

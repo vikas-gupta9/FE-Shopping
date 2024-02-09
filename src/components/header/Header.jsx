@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cart from "../cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../redux/cartSlice/cartSlice";
+import { addtoCart, getCart } from "../../redux/cartSlice/cartSlice";
+import { Link } from "react-router-dom";
+
 
 const Header = (userData) => {
   const [cookies, setCookie, removeCookie] = useCookies();
@@ -21,13 +23,12 @@ const Header = (userData) => {
     setCartOpen(false);
   };
 
-  const logout = (e) => {
-    e.preventDefault();
+  const logout = () => {
     removeCookie("token");
     removeCookie("user_id");
     removeCookie("loggedIn");
     toast.success("Logged out successfully");
-    navigate("/");
+    navigate("/login");
   };
 
   const getTotalQuantity = () => {
@@ -40,7 +41,8 @@ const Header = (userData) => {
 
 
   const handleGetCart = async () => {
-    // e.preventDefault();
+    if(loggedIn === true)
+    {
     try {
       const response = await fetch("http://localhost:8000/cart/get-cart", {
         method: "GET",
@@ -58,10 +60,17 @@ const Header = (userData) => {
     } catch (error) {
       console.log(error);
     }
+  } else return
   };
   useEffect(() => {
-    handleGetCart();
+    let delaytime = setTimeout(() =>handleGetCart(),2000)
+    return() => {
+      clearTimeout(delaytime)
+    }
+    // handleGetCart();
   }, []);
+ 
+
   return (
     <div className="header-container">
       <div className="header-lists">
@@ -69,19 +78,22 @@ const Header = (userData) => {
       </div>
       <div className="header-items">
         <div className="header-cart" onClick={handleCartOpen}>
-          {/* <span>Cart {cartItems.length}</span> */}
-          <span>Cart {getTotalQuantity() || 0}</span>
+          <span>Cart {cartItems.length}</span>
+          {/* <span>Cart {getTotalQuantity() || 0}</span> */}
         </div>
         {cartOpen ? <Cart handleCartClose={handleCartClose} /> : null}
-        <div className="tooltip">
+        {loggedIn ? 
+          <div className="tooltip">
           User
           <span className="tooltiptext">
             <p className="tooltiptext-text">{userData?.userData?.username}</p>
-            <p className="tooltiptext-text" onClick={(e) => logout(e)}>
+            <p className="tooltiptext-text" onClick={logout}>
               Sign-Out
             </p>
           </span>
-        </div>
+        </div> : <div className="tooltip"><Link to={"/login"}>Login</Link></div>
+        }
+        
       </div>
     </div>
   );

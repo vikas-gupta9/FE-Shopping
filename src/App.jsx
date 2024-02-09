@@ -15,8 +15,9 @@ function App() {
     <>
     <Provider store={store}>
       <Routes>
-        <Route exact path="/" element={loggedIn === true ? <Dashboard/> : <Login />} />
-        <Route exact path="/dashboard" element={<Dashboard/>} />
+        {/* <Route exact path="/" element={loggedIn === true ? <Dashboard/> : <Login />} /> */}
+        <Route exact path="/" element={<Dashboard/>} />
+        <Route exact path="/login" element={<Login />} />
       </Routes>
       </Provider>
     </>
