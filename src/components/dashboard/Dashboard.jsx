@@ -6,6 +6,8 @@ import Card from "../card/Card";
 import Header from "../header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { addtoCart } from "../../redux/cartSlice/cartSlice";
+import {useQuery, useMutation} from "@tanstack/react-query"
+import { getLoginUsers } from "../../api/LoginApi";
 
 
 
@@ -20,11 +22,9 @@ const Dashboard = () => {
 
 
   const handleCart =  () => {
-    console.log("handleCart")
-   if(loggedIn === true){
+   if(loggedIn === true && cartItems.length > 0){
     cartItems.map(async(item) =>  {
       console.log("storage", item)
-
         try {
       const response = await fetch("http://localhost:8000/cart/add-to-cart", {
         method: "POST",
@@ -53,39 +53,21 @@ const Dashboard = () => {
     handleCart();
   }, []);
 
+  
+  const getDetailsQuery = useQuery(
+    { queryKey: ['ecom'],
+     queryFn:() =>  loggedIn ? getLoginUsers(auth) : null
+     })
 
+// useEffect(() => {
+//   if(!getDetailsQuery?.isLoading && !getDetailsQuery?.isError) setUserData(getDetailsQuery?.data)
+// }, [getDetailsQuery?.isLoading,getDetailsQuery?.isError,getDetailsQuery?.data]);
 
-
-  const handleGetDetails = async () => {
-    if(loggedIn === true)
-    {
-    try {
-      const response = await fetch("http://localhost:8000/users/current", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${auth}`,
-        },
-      });
-      const data = await response.json();
-      if (response.ok) {
-        console.log("data", data);
-        setUserData(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  } else return
-  };
-  useEffect(() => {
-   handleGetDetails();
-  }, []);
 
 
   return (
     <>
-    <Header userData={userData} />
+    <Header userData={getDetailsQuery?.data} />
     <Card/>
     </>
   );

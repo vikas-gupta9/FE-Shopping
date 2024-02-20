@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
+import {QueryClient} from "@tanstack/react-query"
+import { handleLogInQuery } from "../api/LoginApi";
 
 
 const Login = () => {
@@ -20,6 +23,7 @@ const Login = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const { token: auth, loggedIn, user_id } = cookies;
   const cartItems = useSelector((state) => state.cart.cart);
+  const queryClient = new QueryClient()
 
 
 
@@ -96,38 +100,29 @@ const Login = () => {
       console.log(error);
     }
   };
-  const handleLogIn = async (e) => {
+ 
+
+
+  const userMutation = useMutation({
+    mutationFn: handleLogInQuery,
+    onSuccess:(data) => {
+      console.log("data",data)
+      setCookie("token", data?.accessToken, { path: "/" });
+      setCookie("user_id", data?.user_id, { path: "/" });
+      setCookie("loggedIn", true, { path: "/" });
+      toast.success("User logged in successfully");
+      navigate("/");
+      // queryClient.invalidateQueries({
+      //   queryKey: ['ecom'],
+      // })
+    }
+  })
+  const handleLogIn = (e) => {
     e.preventDefault();
     const { email, password } = loginData;
     let login = { email: email, password: password };
-    try {
-      const response = await fetch("http://localhost:8000/users/login", {
-        method: "POST",
-        body: JSON.stringify(login),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          // Authorization: `Bearer ${auth}`,
-          // 'Access-Control-Allow-Origin': '*'
-        },
-      });
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("login", data);
-        setCookie("token", data?.accessToken, { path: "/" });
-        setCookie("user_id", data?.user_id, { path: "/" });
-        setCookie("loggedIn", true, { path: "/" });
-        toast.success("User logged in successfully");
-        navigate("/");
-       
-      } else {
-        toast.error(data.msg);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    userMutation.mutate(login)
+  }
   
 
 

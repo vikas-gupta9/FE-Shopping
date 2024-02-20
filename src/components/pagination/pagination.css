@@ -1,5 +1,5 @@
 .page-container{
-position: absolute;
+position:relative;
 bottom: 0;
 left: 0;
 width: calc(100% - 1px);
@@ -10,8 +10,14 @@ align-items: center;
 justify-content: center;
 z-index: 100;
 background-color: bisque;
+padding: 10px;
 }
-
+/* .page{
+position:absolute ;
+display: flex;
+align-items: center;
+justify-content: center;
+} */
 .page_btn{
     outline: none;
     border: 1px solid gainsboro;

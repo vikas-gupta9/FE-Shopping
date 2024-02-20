@@ -5,11 +5,17 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter } from "react-router-dom";
+import {QueryClientProvider ,QueryClient} from "@tanstack/react-query"
+
+// Create a client
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
   <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
     <App />
+    </QueryClientProvider>
     <ToastContainer
       position="top-right"
       autoClose={3000}

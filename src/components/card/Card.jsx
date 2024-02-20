@@ -9,6 +9,10 @@ import { getImageURL } from "../../util/image-util";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Pagination from "../pagination/Pagination";
+import { debounce } from "../../debounce/debounce";
+import { useMutation } from "@tanstack/react-query";
+import { handleSearch } from "../../api/ProductApi";
+
 
 const Card = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
@@ -141,6 +145,14 @@ const Card = () => {
     };
   }, [searchValue, page]);
 
+//  const searchMutation = useMutation({
+//     mutationFn: handleSearch,
+//     onSuccess:(data) => {
+     
+//     }
+//   })
+
+
   return (
     <div className="card-container">
       <div className="card-header">
@@ -164,7 +176,9 @@ const Card = () => {
             type="text"
             placeholder="Search by name"
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={(e) => { setSearchValue(e.target.value)
+            
+            }}
           ></input>
         </div>
         <div className="select-price-container" data-testid="Sort by">
